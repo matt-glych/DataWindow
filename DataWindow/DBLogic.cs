@@ -17,7 +17,7 @@ namespace DataWindow
             IntegratedSecurity = true
         };
 
-        // ADD NEW USER TO DATABASE
+        // ADD new user detq
         public static string AddNewUser(User user)
         {
             string result = "";
@@ -28,7 +28,7 @@ namespace DataWindow
                 {
                     SqlCommand cmd = new SqlCommand("Users_Add", conn);
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@ID", user.ID);
+
                     cmd.Parameters.AddWithValue("@FName", user.FirstName);
                     cmd.Parameters.AddWithValue("@LName", user.LastName);
 
@@ -54,39 +54,10 @@ namespace DataWindow
             return result;
         }
 
-        // REMOVE USER FROM DATABASE BY ID
+        // TODO - remove User by ID/Selection
         public static string RemoveUser(User user)
         {
             string result = "";
-
-            using (SqlConnection conn = new SqlConnection(sConnB.ConnectionString))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand("Users_Add", conn);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@ID", user.ID);
-                    cmd.Parameters.AddWithValue("@FName", user.FirstName);
-                    cmd.Parameters.AddWithValue("@LName", user.LastName);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
-
-                    result = "New User Added!";
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
-                    result = "Failed to Add New User!";
-
-                    Console.WriteLine(ex.Message);
-                }
-            }
 
             return result;
         }

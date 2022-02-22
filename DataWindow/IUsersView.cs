@@ -18,9 +18,6 @@ namespace DataWindow
 
         string FirstName { get; set; }
         string LastName { get; set; }
-        string ID { get; set; }
-        User.SexOfPerson Sex { get; set; }
-        bool CanModifyID { set; }
 
     }
 }

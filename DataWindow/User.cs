@@ -14,19 +14,16 @@ namespace DataWindow
         private string _firstName;
         private string _lastName;
         private string _id;
-        private SexOfPerson _sex;
 
         // user constructor
-        public User(string firstName, string lastName, string id, SexOfPerson sex)
+        public User(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
-            _id = id;
-            Sex = sex;
         }
 
 
-        // get and set first name 
+        // get and set First Name 
         public string FirstName
         {
             get { return _firstName; }
@@ -39,37 +36,23 @@ namespace DataWindow
             }
         }
 
-        // get and set last name 
+        // get and set Last Name 
         public string LastName
         {
             get { return _lastName; }
             set
             {
                 if (value.Length > 50)
-                    Console.Write("ERROR: Name must not exceed 50 characters");
+                    Console.Write("ERROR: LastName must not exceed 50 characters");
                 else
                     _lastName = value;   
             }
         }
 
-        // get and set ID 
+        // get ID 
         public string ID
         {
             get { return _id; }
-            set {
-                if (value.Length > 10)
-                    Console.WriteLine("ERRIRL ID must not exceed 10 characters");
-                else
-                    _id = value;
-                }
         }
-
-        // get and set sex
-        public SexOfPerson Sex
-        {
-            get { return _sex; }
-            set { _sex = value; }
-        }
-
     }
 }

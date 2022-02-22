@@ -33,8 +33,6 @@ namespace DataWindow
         {
             _view.FirstName = user.FirstName;
             _view.LastName = user.LastName;
-            _view.ID = user.ID;
-            _view.Sex = user.Sex;
         }
 
         // update User with View details
@@ -42,8 +40,6 @@ namespace DataWindow
         {
             user.FirstName = _view.FirstName;
             user.LastName = _view.LastName;
-            user.ID = _view.ID;
-            user.Sex = _view.Sex;
         }
 
         // load a view
@@ -57,7 +53,7 @@ namespace DataWindow
                 _view.AddUserToGrid(user);
         }
         
-        // change the sekected user by id
+        // change the selected user by id
         public void SelectedUserChanged(string selectedUserId)
         {
             foreach (User user in _users)
@@ -67,7 +63,6 @@ namespace DataWindow
                     _selectedUser = user;
                     UpdateViewDetailValues(user);
                     _view.SetSelectedUserInGrid(user);
-                    _view.CanModifyID = false;
                     break;
                 }
             }
@@ -76,12 +71,8 @@ namespace DataWindow
         // add a new user
         public void AddNewUser()
         {
-            _selectedUser = new User("" /* first name */,
-                                     "" /* last name */,
-                                     String.Empty /* id */,
-                                     User.SexOfPerson.Male /*first name*/);
+            _selectedUser = new User("" /* first name */,  "" /* last name */);
             UpdateViewDetailValues(_selectedUser);
-            _view.CanModifyID = true;
         }
 
         // remove a users
@@ -116,12 +107,12 @@ namespace DataWindow
             }
         }
         
-        // save data, adding user to the grid
+        // save data, adding user to database the grid
         public void Save()
         {
            
             UpdateUserWithViewValues(_selectedUser);
-            if (_selectedUser != null && _selectedUser.ID != String.Empty)
+            if (_selectedUser != null)
             {
                 if (!_users.Contains(_selectedUser))
                 {
@@ -138,7 +129,6 @@ namespace DataWindow
                 }
 
                 _view.SetSelectedUserInGrid(_selectedUser);
-                _view.CanModifyID = false;
             }
             else
             {

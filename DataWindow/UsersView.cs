@@ -18,10 +18,6 @@ namespace DataWindow
         public bool DisplayAdd;
         private GroupBox groupBox1;
         private Button btnRegister;
-        private Label label3;
-        private TextBox txtID;
-        internal RadioButton rFemale;
-        private RadioButton rMale;
         private Label label2;
         private TextBox txtLastName;
         private TextBox txtFirstName;
@@ -72,32 +68,6 @@ namespace DataWindow
         {
             get { return txtLastName.Text; }
             set { txtLastName.Text = value; }
-        }
-        public string ID
-        {
-            get { return txtID.Text; }
-            set { txtID.Text = value; }
-        }
-        public User.SexOfPerson Sex {
-            get 
-            {
-                if (rMale.Checked)
-                    return User.SexOfPerson.Male;
-                else
-                    return User.SexOfPerson.Female;
-            } 
-            set
-            {
-                if (value == User.SexOfPerson.Male)
-                    rMale.Checked = true;
-                else
-                    rFemale.Checked = true;
-            }
-        }
-        // id bool
-        public bool CanModifyID 
-        { 
-            set => txtID.Enabled = value; 
         }
 
         public void AddDetailsVisible(bool value)
@@ -203,10 +173,6 @@ namespace DataWindow
             this.gridUsers = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtID = new System.Windows.Forms.TextBox();
-            this.rFemale = new System.Windows.Forms.RadioButton();
-            this.rMale = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
@@ -252,10 +218,6 @@ namespace DataWindow
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnRegister);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtID);
-            this.groupBox1.Controls.Add(this.rFemale);
-            this.groupBox1.Controls.Add(this.rMale);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtLastName);
             this.groupBox1.Controls.Add(this.txtFirstName);
@@ -265,7 +227,7 @@ namespace DataWindow
             this.groupBox1.Size = new System.Drawing.Size(404, 172);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "User Details:";
+            this.groupBox1.Text = "Data:";
             // 
             // btnRegister
             // 
@@ -276,44 +238,6 @@ namespace DataWindow
             this.btnRegister.Text = "Save";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click_1);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(174, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 13);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "ID";
-            // 
-            // txtID
-            // 
-            this.txtID.Location = new System.Drawing.Point(177, 40);
-            this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(36, 20);
-            this.txtID.TabIndex = 17;
-            // 
-            // rFemale
-            // 
-            this.rFemale.AutoSize = true;
-            this.rFemale.Location = new System.Drawing.Point(60, 120);
-            this.rFemale.Name = "rFemale";
-            this.rFemale.Size = new System.Drawing.Size(59, 17);
-            this.rFemale.TabIndex = 16;
-            this.rFemale.TabStop = true;
-            this.rFemale.Text = "Female";
-            this.rFemale.UseVisualStyleBackColor = true;
-            // 
-            // rMale
-            // 
-            this.rMale.AutoSize = true;
-            this.rMale.Location = new System.Drawing.Point(6, 120);
-            this.rMale.Name = "rMale";
-            this.rMale.Size = new System.Drawing.Size(48, 17);
-            this.rMale.TabIndex = 15;
-            this.rMale.TabStop = true;
-            this.rMale.Text = "Male";
-            this.rMale.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -356,9 +280,16 @@ namespace DataWindow
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.btnAdd);
             this.Name = "UsersView";
+            this.Load += new System.EventHandler(this.UsersView_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
-        }    }
+        }
+
+        private void UsersView_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
