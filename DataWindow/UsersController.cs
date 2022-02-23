@@ -28,6 +28,11 @@ namespace DataWindow
             get { return ArrayList.ReadOnly(_users); }
         }
 
+        public IList UsersList
+        {
+            get { return ArrayList.ReadOnly(_users); }
+        }
+
         // update View with User details
         private void UpdateViewDetailValues(User user)
         {
@@ -48,8 +53,10 @@ namespace DataWindow
             // clear the grid
             _view.ClearGrid();
 
+            _users = DBLogic.GetData();
+
             // add each user to the grid from the view
-            foreach (User user  in _users)
+            foreach (User user  in Users)
                 _view.AddUserToGrid(user);
         }
         
@@ -71,7 +78,7 @@ namespace DataWindow
         // add a new user
         public void AddNewUser()
         {
-            _selectedUser = new User("" /* first name */,  "" /* last name */);
+            _selectedUser = new User("" /* first name */,  "" /* last name */, "" /*ID*/);
             UpdateViewDetailValues(_selectedUser);
         }
 
@@ -120,6 +127,7 @@ namespace DataWindow
                     _users.Add(_selectedUser);
                     _view.AddUserToGrid(_selectedUser);
                     
+                    // add User to database, returning message
                     MessageBox.Show(DBLogic.AddNewUser(_selectedUser));
                 }
                 else
@@ -132,7 +140,7 @@ namespace DataWindow
             }
             else
             {
-                Console.WriteLine("ENTER ID");
+                Console.WriteLine("ERROR");
             }
             
         }

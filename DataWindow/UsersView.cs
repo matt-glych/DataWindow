@@ -22,6 +22,13 @@ namespace DataWindow
         private TextBox txtLastName;
         private TextBox txtFirstName;
         private Label label1;
+        private UsersDataSet usersDataSet;
+        private BindingSource usersBindingSource;
+        private System.ComponentModel.IContainer components;
+        private UsersDataSetTableAdapters.UsersTableAdapter usersTableAdapter;
+        private BindingSource usersDataSet1BindingSource;
+        private UsersDataSet usersDataSet1;
+        private BindingSource usersBindingSource1;
 
         // controller
         UsersController _controller;
@@ -47,18 +54,15 @@ namespace DataWindow
             _controller.RemoveUser();
             //AddDetailsVisible(false);
         }
+
         private void btnRegister_Click_1(object sender, EventArgs e)
         {
             _controller.Save();
             AddDetailsVisible(false);
-
-          
-
         }
 
 
-
-        // form fields getters and setters
+        // Form fields getters and setters
         public string FirstName
         {
             get { return txtFirstName.Text; }
@@ -82,18 +86,16 @@ namespace DataWindow
             parent = gridUsers.Items.Add(user.ID);
             parent.SubItems.Add(user.FirstName);
             parent.SubItems.Add(user.LastName);
-            parent.SubItems.Add(Enum.GetName(typeof(User.SexOfPerson), user.Sex));
         }
-        // clear the grid
+        // clear and create the grid
         public void ClearGrid()
         {
             // define columns in grid
             gridUsers.Columns.Clear();
 
-            gridUsers.Columns.Add("Id", 150, HorizontalAlignment.Left);
+            gridUsers.Columns.Add("Id", 25, HorizontalAlignment.Left);
             gridUsers.Columns.Add("First Name", 150, HorizontalAlignment.Left);
-            gridUsers.Columns.Add("Lastst Name", 150, HorizontalAlignment.Left);
-            gridUsers.Columns.Add("Sex", 50, HorizontalAlignment.Left);
+            gridUsers.Columns.Add("Last Name", 150, HorizontalAlignment.Left);
 
             // Add rows to grid
             gridUsers.Items.Clear();
@@ -161,13 +163,13 @@ namespace DataWindow
                 rowToUpdate.Text = user.ID;
                 rowToUpdate.SubItems[1].Text = user.FirstName;
                 rowToUpdate.SubItems[2].Text = user.LastName;
-                rowToUpdate.SubItems[2].Text = Enum.GetName(typeof(User.SexOfPerson), user.Sex);
             }
         }
 
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.gridUsers = new System.Windows.Forms.ListView();
@@ -177,7 +179,18 @@ namespace DataWindow
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usersDataSet = new DataWindow.UsersDataSet();
+            this.usersTableAdapter = new DataWindow.UsersDataSetTableAdapters.UsersTableAdapter();
+            this.usersDataSet1 = new DataWindow.UsersDataSet();
+            this.usersDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersDataSet1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAdd
@@ -209,7 +222,7 @@ namespace DataWindow
             this.gridUsers.HideSelection = false;
             this.gridUsers.Location = new System.Drawing.Point(0, 190);
             this.gridUsers.Name = "gridUsers";
-            this.gridUsers.Size = new System.Drawing.Size(530, 285);
+            this.gridUsers.Size = new System.Drawing.Size(538, 285);
             this.gridUsers.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.gridUsers.TabIndex = 11;
             this.gridUsers.UseCompatibleStateImageBehavior = false;
@@ -271,10 +284,39 @@ namespace DataWindow
             this.label1.TabIndex = 11;
             this.label1.Text = "First Name";
             // 
+            // usersBindingSource
+            // 
+            this.usersBindingSource.DataMember = "Users";
+            this.usersBindingSource.DataSource = this.usersDataSet;
+            // 
+            // usersDataSet
+            // 
+            this.usersDataSet.DataSetName = "UsersDataSet";
+            this.usersDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usersTableAdapter
+            // 
+            this.usersTableAdapter.ClearBeforeFill = true;
+            // 
+            // usersDataSet1
+            // 
+            this.usersDataSet1.DataSetName = "UsersDataSet";
+            this.usersDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usersDataSet1BindingSource
+            // 
+            this.usersDataSet1BindingSource.DataSource = this.usersDataSet1;
+            this.usersDataSet1BindingSource.Position = 0;
+            // 
+            // usersBindingSource1
+            // 
+            this.usersBindingSource1.DataMember = "Users";
+            this.usersBindingSource1.DataSource = this.usersDataSet1BindingSource;
+            // 
             // UsersView
             // 
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(530, 475);
+            this.ClientSize = new System.Drawing.Size(538, 475);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gridUsers);
             this.Controls.Add(this.btnRemove);
@@ -283,12 +325,34 @@ namespace DataWindow
             this.Load += new System.EventHandler(this.UsersView_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersDataSet1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         private void UsersView_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'usersDataSet1.Users' table. You can move, or remove it, as needed.
+            this.usersTableAdapter.Fill(this.usersDataSet1.Users);
+            // TODO: This line of code loads data into the 'usersDataSet.Users' table. You can move, or remove it, as needed.
+            this.usersTableAdapter.Fill(this.usersDataSet.Users);
+
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.usersTableAdapter.FillBy(this.usersDataSet.Users);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
 
         }
     }

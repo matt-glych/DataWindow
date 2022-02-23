@@ -16,10 +16,11 @@ namespace DataWindow
         private string _id;
 
         // user constructor
-        public User(string firstName, string lastName)
+        public User(string firstName, string lastName, string id)
         {
             FirstName = firstName;
             LastName = lastName;
+            _id = id;
         }
 
 
@@ -30,7 +31,7 @@ namespace DataWindow
             set
             {
                 if (value.Length > 50)
-                    Console.Write("ERROR: FirstName must not exceed 50 characters");
+                    Console.Write("ERROR: First Name must not exceed 50 characters");
                 else
                     _firstName = value;
             }
@@ -43,7 +44,7 @@ namespace DataWindow
             set
             {
                 if (value.Length > 50)
-                    Console.Write("ERROR: LastName must not exceed 50 characters");
+                    Console.Write("ERROR: Last Name must not exceed 50 characters");
                 else
                     _lastName = value;   
             }

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DataWindow
 {
@@ -17,7 +20,61 @@ namespace DataWindow
             IntegratedSecurity = true
         };
 
-        // ADD new user detq
+        // GET User details from database
+        public static IList GetData()
+        {
+            IList result = new ArrayList();
+
+            using (SqlConnection conn = new SqlConnection(sConnB.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("SELECT FirstName, LastName, ID from Users", conn);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+
+                        // create list of the data
+
+                        var userList = new ArrayList();
+
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            User user = new User(row["FirstName"].ToString(), row["LastName"].ToString(), row["ID"].ToString());
+
+                            userList.Add(user);
+                        }
+
+                        
+                        result = userList;
+                    }
+
+                    Console.WriteLine("Data returned!");
+
+                    // return data list
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+
+                    Console.WriteLine("Failed to get data!");
+
+                    result = null;
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return result;
+        }
+
+        // ADD new user details
         public static string AddNewUser(User user)
         {
             string result = "";
