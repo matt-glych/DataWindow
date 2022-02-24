@@ -120,7 +120,7 @@ namespace DataWindow
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand("DELETE FROM Users", conn);
+                    SqlCommand cmd = new SqlCommand("TRUNCATE TABLE Users", conn);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
