@@ -220,10 +220,10 @@ namespace DataWindow
             this.gridUsers.FullRowSelect = true;
             this.gridUsers.GridLines = true;
             this.gridUsers.HideSelection = false;
+            this.gridUsers.LabelWrap = false;
             this.gridUsers.Location = new System.Drawing.Point(0, 190);
             this.gridUsers.Name = "gridUsers";
             this.gridUsers.Size = new System.Drawing.Size(538, 285);
-            this.gridUsers.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.gridUsers.TabIndex = 11;
             this.gridUsers.UseCompatibleStateImageBehavior = false;
             this.gridUsers.View = System.Windows.Forms.View.Details;
