@@ -125,10 +125,14 @@ namespace DataWindow
                 {
                     // add new user if not existing
                     _users.Add(_selectedUser);
-                    _view.AddUserToGrid(_selectedUser);
+                    //_view.AddUserToGrid(_selectedUser);
                     
                     // add User to database, returning message
-                    MessageBox.Show(DBLogic.AddNewUser(_selectedUser));
+                    DBLogic.AddNewUser(_selectedUser);
+
+                    LoadView();
+
+                    MessageBox.Show("New data added");
                 }
                 else
                 {
