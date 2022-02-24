@@ -111,10 +111,80 @@ namespace DataWindow
             return result;
         }
 
+        // TODO - delete all records
+        public static string DeleteAllData()
+        {
+            string result = "";
+
+            using(SqlConnection conn = new SqlConnection(sConnB.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("DELETE FROM Users", conn);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+
+                    result = "All data deleted!";
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+                    result = "Failed to delete all data!";
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            return result;
+        }
+
+
         // TODO - remove User by ID/Selection
         public static string RemoveUser(User user)
         {
             string result = "";
+
+
+            using (SqlConnection conn = new SqlConnection(sConnB.ConnectionString))
+            {
+                try
+                {
+                    string idToRemove = user.ID;
+                    SqlCommand cmd = new SqlCommand("DELETE FROM Users WHERE ID = " + idToRemove, conn);
+
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+
+
+
+                        result = "Data removed";
+                    }
+
+                    Console.WriteLine("Data removed!");
+
+                    // return data list
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        conn.Close();
+                    }
+
+                    Console.WriteLine("Failed to remove data!");
+
+                    result = null;
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
 
             return result;
         }

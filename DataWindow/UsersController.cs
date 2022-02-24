@@ -47,15 +47,16 @@ namespace DataWindow
             user.LastName = _view.LastName;
         }
 
-        // load a view
+        // load a view with data
         public void LoadView()
         {
             // clear the grid
             _view.ClearGrid();
 
+            // get data
             _users = DBLogic.GetData();
 
-            // add each user to the grid from the view
+            // add each user to the grid
             foreach (User user  in Users)
                 _view.AddUserToGrid(user);
         }
@@ -113,6 +114,13 @@ namespace DataWindow
                 }
             }
         }
+
+        public void DeleteAll()
+        {
+            DBLogic.DeleteAllData();
+            //MessageBox.Show("All data deleted");
+            LoadView();
+        }
         
         // save data, adding user to database the grid
         public void Save()
@@ -132,7 +140,7 @@ namespace DataWindow
 
                     LoadView();
 
-                    MessageBox.Show("New data added");
+                    //MessageBox.Show("New data added");
                 }
                 else
                 {

@@ -21,7 +21,7 @@ namespace DataWindow
             UsersView view = new UsersView();
             view.Visible = false;
             
-            // create Controlker
+            // create Controller
             UsersController controller = new UsersController(view);
             controller.LoadView();
             view.ShowDialog();

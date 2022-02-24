@@ -29,6 +29,7 @@ namespace DataWindow
         private BindingSource usersDataSet1BindingSource;
         private UsersDataSet usersDataSet1;
         private BindingSource usersBindingSource1;
+        private Button btn_DeleteAll;
 
         // controller
         UsersController _controller;
@@ -49,18 +50,25 @@ namespace DataWindow
             _controller.AddNewUser();
         }
 
+        // button to remove data entry
         private void btnRemove_Click(object sender, EventArgs e)
         {
             _controller.RemoveUser();
             //AddDetailsVisible(false);
         }
 
+        // button to save data
         private void btnRegister_Click_1(object sender, EventArgs e)
         {
             _controller.Save();
             AddDetailsVisible(false);
         }
 
+        // button to delete all data
+        private void btn_DeleteAll_Click(object sender, EventArgs e)
+        {
+            _controller.DeleteAll();
+        }
 
         // Form fields getters and setters
         public string FirstName
@@ -185,6 +193,7 @@ namespace DataWindow
             this.usersDataSet1 = new DataWindow.UsersDataSet();
             this.usersDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_DeleteAll = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersDataSet)).BeginInit();
@@ -313,10 +322,21 @@ namespace DataWindow
             this.usersBindingSource1.DataMember = "Users";
             this.usersBindingSource1.DataSource = this.usersDataSet1BindingSource;
             // 
+            // btn_DeleteAll
+            // 
+            this.btn_DeleteAll.Location = new System.Drawing.Point(443, 161);
+            this.btn_DeleteAll.Name = "btn_DeleteAll";
+            this.btn_DeleteAll.Size = new System.Drawing.Size(75, 23);
+            this.btn_DeleteAll.TabIndex = 13;
+            this.btn_DeleteAll.Text = "Delete All";
+            this.btn_DeleteAll.UseVisualStyleBackColor = true;
+            this.btn_DeleteAll.Click += new System.EventHandler(this.btn_DeleteAll_Click);
+            // 
             // UsersView
             // 
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(538, 475);
+            this.Controls.Add(this.btn_DeleteAll);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gridUsers);
             this.Controls.Add(this.btnRemove);
@@ -353,7 +373,6 @@ namespace DataWindow
             {
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
-
         }
     }
 }
