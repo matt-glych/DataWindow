@@ -111,7 +111,7 @@ namespace DataWindow
             return result;
         }
 
-        // TODO - delete all records
+        // delete all records
         public static string DeleteAllData()
         {
             string result = "";
@@ -158,13 +158,12 @@ namespace DataWindow
                     string idToRemove = user.ID;
                     SqlCommand cmd = new SqlCommand("DELETE FROM Users WHERE ID = " + idToRemove, conn);
 
-                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                    {
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
 
-
-
-                        result = "Data removed";
-                    }
+                    result = "Data removed";
+                    
 
                     Console.WriteLine("Data removed!");
 

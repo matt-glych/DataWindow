@@ -106,6 +106,7 @@ namespace DataWindow
                     int newSelectedIndex = _users.IndexOf(toRemove);
                     _users.Remove(toRemove);
                     _view.RemoveUserFromGrid(toRemove);
+                    DBLogic.RemoveUser(toRemove);
 
                     if (newSelectedIndex > -1 && newSelectedIndex < _users.Count)
                     {
