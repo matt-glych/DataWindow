@@ -118,9 +118,14 @@ namespace DataWindow
 
         public void DeleteAll()
         {
+            if(_users.Count == 0)
+                MessageBox.Show("Nothing to delete!");
+            else
+                MessageBox.Show("All Users deleted!");
+
             DBLogic.DeleteAllData();
-            //MessageBox.Show("All data deleted");
             LoadView();
+           
         }
         
         // save data, adding user to database the grid
